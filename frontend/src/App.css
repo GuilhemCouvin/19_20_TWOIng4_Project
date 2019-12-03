@@ -20,3 +20,69 @@
 .App-link {
   color: #09d3ac;
 }
+
+.nav{
+  padding: 5px;
+  margin: 5px;
+  float: inline-end;
+}
+
+.button{
+  margin-left: 40%;
+  margin-right: 5px;
+}
+
+/* .col-1{
+  width: 100%;
+  border-color: aliceblue;
+  margin-top: 1%;
+} */
+
+.widget-1{
+  background-color: #424242;
+  margin: 2%;
+  padding: 2%;
+  border-radius: 1% 2%;
+}
+
+.widget-2{
+  background-color: #424242;
+  margin: 2%;
+  padding: 2%;
+  border-radius: 1% 2%;
+}
+
+.widget-3{
+  height: 300px;
+  background-color: #424242;
+  margin: 2%;
+  padding: 2%;
+  border-radius: 1% 2%;
+}
+
+.widget-4{
+  height: 200px;
+  width: 100%;
+  background-color: #424242;
+  margin: 2%;
+  padding: 2%;
+  border-radius: 1% 2%;
+}
+
+.widget-5{
+  height: 200px;
+  width: 100%;
+  background-color: #424242;
+  margin: 2%;
+  padding: 2%;
+  border-radius: 1% 2%;
+}
+
+.widget-6{
+  height: 100px;
+  background-color: #424242;
+  margin: 2%;
+  padding: 2%;
+  border-radius: 1% 2%;
+}
+
