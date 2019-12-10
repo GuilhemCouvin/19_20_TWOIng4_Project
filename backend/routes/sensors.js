@@ -17,10 +17,7 @@ router.get('/', (req, res) => {
     if(err){
       console.log(err);
     }else{
-      res.status(200).json({
-        message: 'Sensors found!',
-        sensors
-      });
+      res.json(sensors);
     }
   });
 });

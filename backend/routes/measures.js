@@ -17,26 +17,30 @@ router.get('/', (req, res) => {
     if(err){
       console.log(err);
     }else{
-      res.status(200).json({
-        message: 'Measures found!',
-        measures
-      });
+      res.json(measures);
     }
   });
 });
 
 /* GET one measure.*/
-// router.get('/:id',(req,res)=>{
-//   //Get id in params
-//   const { id } = req.params;
-//   //Find measure id in DB
-//   const measure = _.find(measures, ["id",id]);
-//   //Return measure
-//   res.status(200).json({
-//     message: 'measure found!',
-//     measure
-//   });
-// });
+router.get('/:id', function(req, res) {
+  let id = req.params.id;
+  Measure.findById(id,function(err,measure){
+    res.json(measure);
+    console.log(measure);
+  }); 
+});
+
+
+/* DELETE one measure.*/
+router.delete('/:id', function(req, res) {
+  let id = req.params.id;
+  Measure.findByIdAndDelete(id,function(err,measure){
+    res.send(`Measure:${measure} removed succesfully !`);
+  }); 
+});
+
+
 
 /* POST measures listing. */
 router.post('/add', (req, res) => {

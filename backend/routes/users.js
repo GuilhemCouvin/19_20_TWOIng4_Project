@@ -24,16 +24,11 @@ router.get('/', (req, res) => {
 });
 
 /* GET one user.*/
-router.get('/:id',(req,res)=>{
-  //Get id in params
-  const { id } = req.params;
-  //Find user id in DB
-  const user = _.find(users, ["id",id]);
-  //Return user
-  res.status(200).json({
-    message: 'User found!',
-    user
-  });
+router.get('/:id', function(req, res) {
+  let id = req.params.id;
+  User.findById(id,function(err,user){
+    res.json(user);
+  }); 
 });
 
 /* POST users listing. */

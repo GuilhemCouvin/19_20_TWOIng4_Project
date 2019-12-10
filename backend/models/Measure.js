@@ -4,7 +4,7 @@ var measureSchema = new mongoose.Schema({
     measureID: Number,
     type: String,
     creationDate: Date,
-    Value: Number,
+    value: Number,
     sensorID: Number,
 })
 

@@ -4,6 +4,7 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var cors = require('cors');
+var bodyParser = require('body-parser');
 
 mongoose.connect('mongodb://localhost/projetweb',{useNewUrlParser:true,useUnifiedTopology: true});
 const connection = mongoose.connection;
@@ -24,6 +25,7 @@ var measuresRouter = require("./routes/measures");
 
 var app = express();
 app.use(cors());
+app.use(bodyParser.json());
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
