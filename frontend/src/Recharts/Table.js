@@ -50,7 +50,7 @@ class Tablechart extends Component{
       console.log('taille:'+this.state.index);
         return (
           <div>
-          <h3>Liste des utilisateurs:   </h3>
+          <h3 style={{textAlign: 'center',marginTop:26}}>Liste des utilisateurs   </h3>
             <Table dark>
               <thead>
                 <tr>

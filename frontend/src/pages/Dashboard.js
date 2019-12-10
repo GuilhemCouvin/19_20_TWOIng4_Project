@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Container,Row,Col,Button} from 'react-bootstrap';
+import {useParams} from 'react-router-dom';
 import './Dashboard.css';
 
 import Widget from './../Recharts/Recharts';
@@ -7,7 +8,7 @@ import Chart from './../Recharts/Barcharts';
 import Circle from './../Recharts/Circlecharts';
 import TodoApp from './../Recharts/Todolist';
 import Bar from './../Recharts/ProgressBar';
-import Tablechart from './../Recharts/Table';
+import Tablechart from './../Recharts/TableMeasures';
 
 import "react-circular-progressbar/dist/styles.css";
 
@@ -71,7 +72,6 @@ export default class Dashboard extends Component {
     }
 
   render(){
-    //console.log(this.state.moyenne.maths);
     return (
       <div>
         <Container>
@@ -99,7 +99,7 @@ export default class Dashboard extends Component {
               < TodoApp todoItems={this.state.todoItems}/>
             </Col>
             <Col xs={12} md={8} className="widget">
-              <Tablechart data={this.state.bulletin}/>
+              <Tablechart />
             </Col>
           </Row>
         </Container>

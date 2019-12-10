@@ -3,6 +3,8 @@ import {Container,Row,Col,Button,FormGroup} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Additem.css';
 
+import Tablechart from './../Recharts/Table';
+
 import Form from 'react-bootstrap/Form'
 import Axios from 'axios';
 
@@ -105,6 +107,11 @@ class Additem extends Component {
                 </Form>
                 
             </Col>
+        </Row>
+        <Row>
+          <Col>
+          <Tablechart />
+          </Col>
         </Row>
         </Container>
       </div>
