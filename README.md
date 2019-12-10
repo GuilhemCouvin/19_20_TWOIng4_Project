@@ -1,25 +1,13 @@
-## Daubignard Adrien - Couvin Guilhem
+# Frontend
 
-# Projet de fin de semestre
+Ce dossier contiendra la partie frontend de votre projet.
 
-A lire impérativement avant de commencer quoi que ce soit, ce sont les règles que vous devrez appliquer tout au long du semestre:
+Le frontend à été initalisé avec un create-react-app et sotrybook y est deja installé avec un exemple de stories que vous trouverez dans le repertoire `src/stories`.
 
-<p align="center">
- <a href="https://github.com/clementAC/Instructions-Technologies-Web-OCRES-Ing4/blob/master/README.md">Règles pour le semestre</a>
-</p>
+Storybook est là pour vous aider à prototyper et documenter vos composants. Si nous n'arrivons pas à lancer votre projet, nous pourrons au moins regarder vos composants en fonctionnement.
 
-## Introduction
+## Documentation
 
-Ce repo git contient deux repertoires. L'un concerne la partie backend et l'autre la partie frontend.
+Vous pourrez supprimer le contenu de ce README et vous l'approprier en y notant les éléments importants de votre projet. Il est très important de bien documenter un projet !
 
-Les deux repertoires ont été initialisé pour vous aider à démarrer le projet dans les meilleures conditions.
-
-Chacun de ces repertoires contient un README.md qui vous pouvez vous approprier. Nous vous encourageons à le faire en y mettant toute les informations nécessaires à la compréhension de votre projet
-
-## Instructions
-
-Les instructions sont à retrouver dans le pdf mis à disposition sur campus.
-
-**Le non respect de ces instructions entraînera des pertes de points alors prenez le temps de tout lire et de poser des questions si vous ne comprenez pas**
-
-Pour rappel, la probabilité de recevoir une réponse à un mail envoyé quelques heures avant le rendu est très proche de 0.
+Inspirez-vous des grands repos open sources qui existent sur github. Les informations qui reviennent souvent sont une description du projet (pourquoi, comment...), la maniere de lancer le projet et eventuellement d'y contribuer, une documentation sur des éléments que vous voulez mettre en avant et pour finir les noms des contributeurs.
