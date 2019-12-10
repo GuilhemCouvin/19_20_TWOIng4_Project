@@ -25,13 +25,11 @@ class Tablechart extends Component{
   componentDidMount(){
     axios.get('http://localhost:3000/users/')
       .then(response => {
-        this.setState({
-          users:response.data
-        })
+        this.setState({users:response.data});
+      })
         .catch(function(error){
           console.log(error);
         })
-      })
   }
 
   usersList(){
