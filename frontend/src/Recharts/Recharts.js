@@ -20,7 +20,7 @@ export default class Widget extends Component {
         const { list } = this.state;
         return (
             <div className="container">
-                <h6 style={{color:'white'}}>Evolution des notes:</h6>
+                <h3>Evolution des notes:</h3>
                 <LineChart 
                     width={550} 
                     height={200} 
@@ -30,7 +30,7 @@ export default class Widget extends Component {
                 <Line type="monotone" dataKey="maths" stroke="#8884d8" />
                 <Line type="monotone" dataKey="physics" stroke="#40A497" />
                 <CartesianGrid stroke="white" strokeDasharray="5 5" />
-                <XAxis dataKey="name" />
+                <XAxis dataKey="date" />
                 <YAxis />
                 <Tooltip />
                 </LineChart>

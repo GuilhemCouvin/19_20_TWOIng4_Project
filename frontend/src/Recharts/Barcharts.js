@@ -28,8 +28,8 @@ export default class Chart extends Component {
     const { list } = this.state;
     return (
       <BarChart
-        width={400}
-        height={100}
+        width={600}
+        height={300}
         data={list}
         margin={{ top: 5, right: 20, left: 5, bottom: 0 }}
       >

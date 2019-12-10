@@ -1,60 +1,96 @@
 import React, { Component } from 'react';
-import {Container,Row,Col,Button} from 'react-bootstrap';
+import { BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {Container,Row,Col,Button, NavbarItem } from 'react-bootstrap';
 import './App.css';
 
-import Dash from './Dashboard';
-import Additem from './Additem';
+import Dashboard from './pages/Dashboard';
+import Additem from './pages/Additem';
 
 import "react-circular-progressbar/dist/styles.css";
 
 
 class App extends Component {
 
+  
+
   state = {
-    bulletin: [
-    {name: '07/11', maths: 15, physics: 13}, 
-    {name: '14/11', maths: 17, physics: 15},
-    {name: '21/11', maths: 8, physics: 13},
-    {name: '28/11', maths: 11, physics: 11},
-    {name: '05/12', maths: 13, physics: 16},
-  ],
-  moyenne: {
-    maths:10, 
-    physics:10
-  },
-  Dashboard: true,
-  Additem: false
-};
+    user:[
+      {userID:'0', country:'France', personsInHouse:'4', houseSize:'medium'},
+      {userID:'1', country:'France', personsInHouse:'6', houseSize:'big'},
+      {userID:'2', country:'Espagne', personsInHouse:'2', houseSize:'small'}
+    ],
+    sensor:[
+      {sensorID:'0', creationDate:'2014-01-01T23:28:56.782Z', userID:'0', location:'kitchen'},
+      {sensorID:'1', creationDate:'2015-01-01T23:28:56.782Z', userID:'0', location:'bedroom'},
+      {sensorID:'2', creationDate:'2016-01-01T23:28:56.782Z', userID:'0', location:'bathroom'},
+
+      {sensorID:'3', creationDate:'2014-01-01T23:28:56.782Z', userID:'1', location:'kitchen'},
+      {sensorID:'4', creationDate:'2015-01-01T23:28:56.782Z', userID:'1', location:'bedroom'},
+      {sensorID:'5', creationDate:'2016-01-01T23:28:56.782Z', userID:'1', location:'bathroom'},
+
+      {sensorID:'6', creationDate:'2014-01-01T23:28:56.782Z', userID:'2', location:'kitchen'},
+      {sensorID:'7', creationDate:'2015-01-01T23:28:56.782Z', userID:'2', location:'bedroom'},
+      {sensorID:'8', creationDate:'2016-01-01T23:28:56.782Z', userID:'2', location:'bathroom'},
+    ],
+    measure:[
+      {measureID:'0', type:'humidity', creationDate:'2016-01-01T23:28:56.782Z', value:'70', sensorID:'2'},
+      {measureID:'1', type:'airPollution', creationDate:'2015-01-01T23:28:56.782Z', value:'4', sensorID:'1'},
+      {measureID:'2', type:'temperature', creationDate:'2014-01-01T23:28:56.782Z', value:'7', sensorID:'0'},
+
+      {measureID:'3', type:'humidity', creationDate:'2016-01-01T23:28:56.782Z', value:'80', sensorID:'5'},
+      {measureID:'4', type:'airPollution', creationDate:'2015-01-01T23:28:56.782Z', value:'3', sensorID:'4'},
+      {measureID:'5', type:'temperature', creationDate:'2014-01-01T23:28:56.782Z', value:'9', sensorID:'3'},
+
+      {measureID:'6', type:'humidity', creationDate:'2016-01-01T23:28:56.782Z', value:'90', sensorID:'8'},
+      {measureID:'7', type:'airPollution', creationDate:'2015-01-01T23:28:56.782Z', value:'2', sensorID:'7'},
+      {measureID:'8', type:'temperature', creationDate:'2014-01-01T23:28:56.782Z', value:'11', sensorID:'6'},
+
+
+      {measureID:'9', type:'humidity', creationDate:'2017-01-01T23:28:56.782Z', value:'75', sensorID:'2'},
+      {measureID:'10', type:'airPollution', creationDate:'2016-01-01T23:28:56.782Z', value:'5', sensorID:'1'},
+      {measureID:'11', type:'temperature', creationDate:'2015-01-01T23:28:56.782Z', value:'13', sensorID:'0'},
+
+      {measureID:'12', type:'humidity', creationDate:'2017-01-01T23:28:56.782Z', value:'85', sensorID:'5'},
+      {measureID:'13', type:'airPollution', creationDate:'2016-01-01T23:28:56.782Z', value:'4', sensorID:'4'},
+      {measureID:'14', type:'temperature', creationDate:'2015-01-01T23:28:56.782Z', value:'15', sensorID:'3'},
+
+      {measureID:'15', type:'humidity', creationDate:'2017-01-01T23:28:56.782Z', value:'95', sensorID:'8'},
+      {measureID:'16', type:'airPollution', creationDate:'2016-01-01T23:28:56.782Z', value:'3', sensorID:'7'},
+      {measureID:'17', type:'temperature', creationDate:'2015-01-01T23:28:56.782Z', value:'17', sensorID:'6'}
+    ]
+  }
+
 
   handleClickDash = () => {
     this.setState({
-      Dashboard:true,
-      Additem:false
+      dashboard:true,
+      additem:false
     });
   }
 
   handleClickAdditem = () => {
     this.setState({
-      Dashboard:false,
-      Additem:true
+      dashboard:false,
+      additem:true
     });
   }
 
   render(){
 
     return (
-      <div>
-        <Container>
-          <Row className="nav">
-              <Button onClick={(e) => this.handleClickDash()} className="button" variant="light">Dashboard </Button>
-              <Button onClick={(e) => this.handleClickAdditem()} variant="light">Add Data</Button>
-          </Row>
-
-          { this.state.Dashboard && <Dash data={this.state}/> }
-          { this.state.Additem && <Additem /> }
-
-        </Container>
-      </div>
+      <Router>
+        <div>
+          <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+            <Link to='/' className="navbar-brand">Dashboard</Link>
+            <Link to='/admin' className="navbar-brand">Admin</Link>
+          </nav>
+          <Container>
+            <Route path='/' exact component={Dashboard} />
+            <Route path='/admin'  component={Additem} />
+          </Container>
+        </div>
+      </Router>
     );
   }
 }

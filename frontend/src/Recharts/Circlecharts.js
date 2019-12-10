@@ -35,6 +35,7 @@ export default class Circle extends Component {
     return (
       <div>
           <Example >
+            <h6>Moyenne générale:</h6>
         <AnimatedProgressProvider
           valueStart={0}
           valueEnd={moyenne}
@@ -63,8 +64,7 @@ export default class Circle extends Component {
 function Example(props) {
   return (
     <div style={{ marginBottom: 20 }}>
-      <h6 style={{color:'white'}}>Moyenne générale:</h6>
-      <div style={{ marginTop: 20, display: "flex" }}>
+      <div style={{ display: "flex" }}>
         <div style={{ width: "100%", paddingRight: 30 }}>{props.children}</div>
       </div>
     </div>
