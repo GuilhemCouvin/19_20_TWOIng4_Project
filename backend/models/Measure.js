@@ -5,7 +5,7 @@ var measureSchema = new mongoose.Schema({
     type: String,
     creationDate: Date,
     value: Number,
-    sensorID: Number,
+    sensorID: String,
 })
 
 var Measure = mongoose.model('Measure',measureSchema);

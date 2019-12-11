@@ -5,7 +5,7 @@ var Measure = require('./../models/Measure');
 
 /* GET users listing. */
 // router.get('/', (req, res) => {
-//   User.find({}).populate('country').then(users => {
+//   User.find({}).populate('location').then(users => {
 //     res.render('respond with a resource'); //Envoie la data récupérée à l'affichage
 //   })
 // });

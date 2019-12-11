@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
 
 var userSchema = new mongoose.Schema({
-    userID:Number,
-    country: String,
+    // _id: String,
+    location: String,
     personsInHouse: Number,
     houseSize: String,
 })

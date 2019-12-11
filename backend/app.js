@@ -6,7 +6,7 @@ var logger = require("morgan");
 var cors = require('cors');
 var bodyParser = require('body-parser');
 
-mongoose.connect('mongodb://localhost/projetweb',{useNewUrlParser:true,useUnifiedTopology: true});
+mongoose.connect('mongodb://localhost/backend',{useNewUrlParser:true,useUnifiedTopology: true});
 const connection = mongoose.connection;
 
 connection.once('open',function(){

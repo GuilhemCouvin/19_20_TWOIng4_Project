@@ -5,7 +5,7 @@ var User = require('./../models/User');
 
 /* GET users listing. */
 // router.get('/', (req, res) => {
-//   User.find({}).populate('country').then(users => {
+//   User.find({}).populate('location').then(users => {
 //     res.render('respond with a resource'); //Envoie la data récupérée à l'affichage
 //   })
 // });
@@ -24,15 +24,16 @@ router.get('/', (req, res) => {
 });
 
 /* GET one user.*/
-router.get('/:id', function(req, res) {
+router.route('/:id').get(function(req, res) {
   let id = req.params.id;
+  console.log('route',id);
   User.findById(id,function(err,user){
     res.json(user);
   }); 
 });
 
 /* POST users listing. */
-router.post('/add', (req, res) => {
+router.route('/add').post((req, res) => {
   let user = new User(req.body);
   console.log(req.body);
   user.save()

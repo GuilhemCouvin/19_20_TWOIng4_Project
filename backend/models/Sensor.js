@@ -1,10 +1,10 @@
 var mongoose = require('mongoose');
 
 var sensorSchema = new mongoose.Schema({
-    sensorID: Number,
+    _id: String,
     creationDate: Date,
-    userID: Number,
     location: String,
+    userID: String
 })
 
 var Sensor = mongoose.model('Sensor',sensorSchema);

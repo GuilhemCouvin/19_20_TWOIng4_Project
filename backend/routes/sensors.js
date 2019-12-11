@@ -5,7 +5,7 @@ var Sensor = require('./../models/Sensor');
 
 /* GET users listing. */
 // router.get('/', (req, res) => {
-//   User.find({}).populate('country').then(users => {
+//   User.find({}).populate('location').then(users => {
 //     res.render('respond with a resource'); //Envoie la data récupérée à l'affichage
 //   })
 // });
@@ -23,17 +23,14 @@ router.get('/', (req, res) => {
 });
 
 /* GET one sensor.*/
-// router.get('/:id',(req,res)=>{
-//   //Get id in params
-//   const { id } = req.params;
-//   //Find sensor id in DB
-//   const sensor = _.find(sensors, ["id",id]);
-//   //Return sensor
-//   res.status(200).json({
-//     message: 'sensor found!',
-//     sensor
-//   });
-// });
+router.route('/:id').get(function(req, res) {
+  let id = req.params.id;
+  console.log(id);
+  Sensor.find({_id:id},function(err,sensor){
+    res.json(sensor);
+    console.log(sensor);
+  }); 
+});
 
 /* POST sensors listing. */
 router.post('/add', (req, res) => {
@@ -46,5 +43,26 @@ router.post('/add', (req, res) => {
     res.status(400).send('adding new sensor failed');
   });
 });
+
+/* UPDATE one sensor*/
+router.route('/update/:id').post(function(req, res) {
+  Sensor.findById(req.params.id,function(err,sensor){
+    if(!sensor){
+      res.status(404).send('Data not found');
+    }else{
+      sensor.userID = req.body.userID;
+      sensor.location = req.body.location;
+      sensor.creationDate = req.body.creationDate;
+
+      sensor.save().then(sensor => {
+        res.json('Sensor updated');
+      })
+      .catch(err => {
+        res.status(400).send('Update not possible');
+      });
+    }
+  });
+});
+
 
 module.exports = router;
