@@ -13,7 +13,7 @@ export default class DeleteUser extends Component {
     this.state={
         id:props.id,
         userID:'',
-      country:'',
+      location:'',
       personsInHouse:'',
       houseSize:'' 
       }
@@ -29,11 +29,13 @@ export default class DeleteUser extends Component {
   }
 
   componentDidMount(){
+    console.log(this.props.match.params.id);
       Axios.get('http://localhost:3000/users/'+this.props.match.params.id)
       .then(response => {
+        console.log(response.data);
           this.setState({
-            userID:response.data.userID,
-            country:response.data.country,
+            userID:response.data._id,
+            location:response.data.location,
             personsInHouse:response.data.personsInHouse,
             houseSize:response.data.houseSize,
           })
@@ -60,8 +62,8 @@ export default class DeleteUser extends Component {
                         
                     </Form.Group>
                     <Form.Group controlId="exampleForm.ControlInput2">
-                        <Form.Label><strong>country:</strong> </Form.Label><br/>
-                        <Form.Label>{this.state.country}</Form.Label>
+                        <Form.Label><strong>location:</strong> </Form.Label><br/>
+                        <Form.Label>{this.state.location}</Form.Label>
                         
                     </Form.Group>
                     <Form.Group controlId="exampleForm.ControlInput3">

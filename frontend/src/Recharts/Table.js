@@ -7,7 +7,7 @@ import axios from 'axios';
 const User = props => (
   <tr>
     <td>{props.user.userID}</td>
-    <td>{props.user.country}</td>
+    <td>{props.user.location}</td>
     <td>{props.user.personsInHouse}</td>
     <td>{props.user.houseSize}</td>
     <td>
@@ -53,7 +53,7 @@ class Tablechart extends Component{
               <thead>
                 <tr>
                   <th>ID</th>
-                  <th>Country</th>
+                  <th>Location</th>
                   <th>Persons number</th>
                   <th>House Size</th>
                   <th>Action</th>

@@ -1,8 +1,8 @@
 {
     "user":[
-      {"userID":0, "country":"France", "personsInHouse":4, "houseSize":"medium"},
-      {"userID":1, "country":"France", "personsInHouse":6, "houseSize":"big"},
-      {"userID":2, "country":"Espagne","personsInHouse":2, "houseSize":"small"}
+      {"userID":0, "location":"France", "personsInHouse":4, "houseSize":"medium"},
+      {"userID":1, "location":"France", "personsInHouse":6, "houseSize":"big"},
+      {"userID":2, "location":"Espagne","personsInHouse":2, "houseSize":"small"}
     ],
     "sensor":[
       {"sensorID":0, "creationDate":"2014-01-01T23:28:56.782Z", "userID":0, "location":"kitchen"},
@@ -64,9 +64,9 @@
 
   {
     "user":[
-      {userID:0, country:"France", personsInHouse:4, houseSize:"medium"},
-      {userID:1, country:"France", personsInHouse:6, houseSize:"big"},
-      {userID:2, country:"Espagne",personsInHouse:2, houseSize:"small"}
+      {userID:0, location:"France", personsInHouse:4, houseSize:"medium"},
+      {userID:1, location:"France", personsInHouse:6, houseSize:"big"},
+      {userID:2, location:"Espagne",personsInHouse:2, houseSize:"small"}
     ],
     "sensor":[
       {sensorID:0, creationDate:"2014-01-01T23:28:56.782Z", userID:0, location:"kitchen"},

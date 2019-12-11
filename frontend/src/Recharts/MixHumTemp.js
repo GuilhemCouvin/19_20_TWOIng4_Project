@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import './Recharts.css';
 import { 
   ResponsiveContainer,
-    LineChart, 
+    ComposedChart, 
     Line, 
+    Bar,
+    Area,
     CartesianGrid, 
     XAxis, 
     YAxis, 
@@ -11,7 +13,7 @@ import {
 } from 'recharts';
 import axios from 'axios';
 
-export default class Widget extends Component {
+export default class Mix extends Component {
     constructor(props){
         super(props);
         this.state ={
@@ -63,10 +65,13 @@ export default class Widget extends Component {
           this.setState({
             user_measures:array
           });
-          const array_temp =this.state.temperatures;
+          const array_temp =[];
+          const array_hum =[];
           Array.prototype.forEach.call(this.state.user_measures,element => {
-            if(element.type === 'temperature'){
+            if(element.type === 'airPollution'){
                 array_temp.push(element);
+            } else if(element.type === 'humidity'){
+                array_hum.push(element);
             }
           });
           this.setState({
@@ -74,10 +79,17 @@ export default class Widget extends Component {
           });
             console.log('temp: ',this.state.temperatures);
           const list = [];
+          Array.prototype.forEach.call(array_hum,element => {
+              list.push({
+                  creationDate:element.creationDate,
+                  hum:element.value
+              })
+          })
+        
         Array.prototype.forEach.call(this.state.temperatures,element =>{
             list.push({
                 creationDate:element.creationDate,
-                value:element.value
+                temp:element.value
             })
         })
         this.setState({
@@ -99,19 +111,17 @@ export default class Widget extends Component {
           console.log('charts: ',this.state.temperatures)
         return (
             <div className="container">
-                <h3>Evolution de la température (en °C)</h3>
+                <h3>Analyse: Humidité et Pollution de l'air</h3>
                 <ResponsiveContainer aspect="2">
-                <LineChart 
-                    data={this.state.list} 
-                    margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
-                >
-                <Line type="monotone" dataKey="value" stroke="#8884d8" />
-                <CartesianGrid stroke="white" strokeDasharray="5 5" />
-                <XAxis dataKey="creationDate" />
-                <YAxis />
-                <Tooltip />
-                </LineChart>
-                {/* {this.measuresList()} */}
+                    <ComposedChart data={this.state.list} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
+
+                        <Area type="monotone" dataKey="temp" stroke="#8884d8" />
+                        <Bar dataKey="hum" barSize={20} fill="#413ea0" />
+                        <CartesianGrid stroke="white" strokeDasharray="5 5" />
+                        <XAxis dataKey="creationDate" />
+                        <YAxis />
+                        <Tooltip />
+                    </ComposedChart>
                 </ResponsiveContainer>
             </div>
         );

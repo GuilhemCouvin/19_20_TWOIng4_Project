@@ -13,29 +13,21 @@ class Additem extends Component {
   constructor(props){
     super(props);
 
-    this.onChangeUserID = this.onChangeUserID.bind(this);
-    this.onChangeUserCountry = this.onChangeUserCountry.bind(this);
+    this.onChangeUserLocation = this.onChangeUserLocation.bind(this);
     this.onChangeUserPersonsInHouse = this.onChangeUserPersonsInHouse.bind(this);
     this.onChangeUserHouseSize = this.onChangeUserHouseSize.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state={
-      userID:'',
-      country:'',
+      location:'',
       personsInHouse:'',
       houseSize:''
     }
   }
 
-  onChangeUserID(e){
+  onChangeUserLocation(e){
     this.setState({
-      userID: e.target.value
-    });
-  }
-
-  onChangeUserCountry(e){
-    this.setState({
-      country: e.target.value
+      location: e.target.value
     });
   }
 
@@ -55,14 +47,12 @@ class Additem extends Component {
     e.preventDefault();
 
     console.log(`New User !`);
-    console.log('UserID: '+this.state.userID);
-    console.log('country: '+this.state.country);
+    console.log('location: '+this.state.location);
     console.log('personsInHouse: '+this.state.personsInHouse);
     console.log('houseSize: '+this.state.houseSize);
 
     const newUser = {
-      userID: this.state.userID,
-      country: this.state.country,
+      location: this.state.location,
       personsInHouse: this.state.personsInHouse,
       houseSize: this.state.houseSize
     }
@@ -70,8 +60,7 @@ class Additem extends Component {
     Axios.post('http://localhost:3000/users/add',newUser)
     .then(res => console.log(res.data));
     this.setState({
-      userID:'',
-      country:'',
+      location:'',
       personsInHouse:'',
       houseSize:''
     })
@@ -88,13 +77,9 @@ class Additem extends Component {
             style={{color: 'white'}}
             md={{ span: 6, offset: 3 }}>
                 <Form onSubmit={this.onSubmit}>
-                    <Form.Group controlId="exampleForm.ControlInput1">
-                        <Form.Label>User ID: </Form.Label>
-                        <Form.Control type="text" value={this.state.userID} onChange={this.onChangeUserID}/>
-                    </Form.Group>
                     <Form.Group controlId="exampleForm.ControlInput2">
-                        <Form.Label>Country: </Form.Label>
-                        <Form.Control type="text" value={this.state.country} onChange={this.onChangeUserCountry}/>
+                        <Form.Label>Location: </Form.Label>
+                        <Form.Control type="text" value={this.state.location} onChange={this.onChangeUserLocation}/>
                     </Form.Group>
                     <Form.Group controlId="exampleForm.ControlInput3">
                         <Form.Label>Persons in the House: </Form.Label>

@@ -7,11 +7,11 @@ import Thermometer from 'react-thermometer-component'
 const Temperature = props => (
     <Thermometer 
                         theme="dark"
-                        value={props.measure.value}
+                        value={props.measure}
                         max="30"
                         steps="3"
                         format="°C"
-                        size="normal"
+                        size="big"
                         height="200"
                     />
   )
@@ -24,7 +24,8 @@ export default class Thermo extends Component{
           user_measures:[],
           sensors: [],
           user_sensors:[],
-          id: props.id
+          id: props.id,
+          currentMeasure: []
         }
       }
     
@@ -33,7 +34,9 @@ export default class Thermo extends Component{
         axios.get('http://localhost:3000/sensors/')
         .then(response => {
           this.setState({sensors:response.data});
-    
+          console.log(this.state.sensors[14].userID);
+          console.log('id:',this.state.id);
+
           const array =this.state.user_sensors;
           Array.prototype.forEach.call(this.state.sensors,element => {
             if(element.userID == this.state.id){
@@ -43,7 +46,7 @@ export default class Thermo extends Component{
           this.setState({
             user_sensors:array
           });
-          console.log(this.state.user_sensors);
+          console.log('u:',this.state.user_sensors);
     
         })
           .catch(function(error){
@@ -53,20 +56,33 @@ export default class Thermo extends Component{
         axios.get('http://localhost:3000/measures/')
         .then(response => {
           this.setState({measures:response.data});
-    
+          console.log('yo:',this.state.measures);
+
           const array =this.state.user_measures;
           Array.prototype.forEach.call(this.state.user_sensors,sensor => {
             Array.prototype.forEach.call(this.state.measures,measure => {
-              if(sensor.sensorID === measure.sensorID){
+              if(sensor._id == measure.sensorID){
                 array.push(measure);
               }
             });
           });
-          console.log(array);
           this.setState({
             user_measures:array
           });
-    
+          const array_temp = this.state.measures;
+          var i = 0;
+          var temp = 0;
+          Array.prototype.forEach.call(this.state.user_measures,measure => {
+            if(measure.type==='temperature'){
+              array_temp.push(measure);
+              i++;
+              temp = temp + measure.value;
+            }
+          })
+          this.setState({
+            moy:temp/i 
+          })
+          console.log('moy:',this.state.moy);
         })
           .catch(function(error){
             console.log(error);
@@ -80,16 +96,12 @@ export default class Thermo extends Component{
       }
     
       measuresList(){
-        return this.state.user_measures.map(function(currentMeasure,i){
-          if(currentMeasure.type==='temperature' && currentMeasure.creationDate=='2016-01-01T23:28:56.782Z'){
-            return <Temperature measure={currentMeasure} key={i} />
-          }
-        })
+        return <Temperature measure={this.state.moy} />
       }
     render(){
         return(
             <div>
-                <h3>Température</h3>
+                <h4>Moyenne (en °C)</h4>
                 <div style={{display: 'flex', justifyContent: 'center'}}>
                     {this.measuresList()}
                 </div>

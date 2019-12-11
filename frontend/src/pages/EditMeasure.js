@@ -12,30 +12,26 @@ export default class Edit extends Component {
     super(props);
     this.state={
         id:props.id,
-        measureID:'',
-        type:'',
         creationDate:'',
-        value:'',
-        sensorID:'' 
+        location:'',
+        userID:'' 
       }
 
-    this.onChangeMeasureID = this.onChangeMeasureID.bind(this);
-    this.onChangeType = this.onChangeType.bind(this);
+    this.onChangeLocation = this.onChangeLocation.bind(this);
     this.onChangeCreationDate = this.onChangeCreationDate.bind(this);
-    this.onChangeValue = this.onChangeValue.bind(this);
-    this.onChangeSensorID = this.onChangeSensorID.bind(this);
+    this.onChangeUserID = this.onChangeUserID.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  onChangeMeasureID(e){
+  onChangeLocation(e){
     this.setState({
-        measureID: e.target.value
+        location: e.target.value
     });
   }
 
-  onChangeType(e){
+  onChangeUserID(e){
     this.setState({
-        type: e.target.value
+        userID: e.target.value
     });
   }
 
@@ -45,52 +41,33 @@ export default class Edit extends Component {
     });
   }
 
-  onChangeValue(e){
-    this.setState({
-        value: e.target.value
-    });
-  }
-
-  onChangeSensorID(e){
-    this.setState({
-        sensorID: e.target.value
-    });
-  }
-
   onSubmit(e){
     e.preventDefault();
 
-    console.log(`Measure updated !`);
-    console.log('measureID: '+this.state.measureID);
-    console.log('type: '+this.state.type);
-    console.log('creationDate: '+this.state.creationDate);
-    console.log('value: '+this.state.value);
-    console.log('sensorID: '+this.state.sensorID);
-
     const updateMeasure = {
-        measureID: this.state.measureID,
-        type: this.state.type,
+        location: this.state.location,
+        userID: this.state.userID,
         creationDate: this.state.creationDate,
-        value: this.state.value,
-        sensorID: this.state.sensorID
+
     }
     console.log('body:',updateMeasure);
-    Axios.post('http://localhost:3000/measures/update/'+this.props.match.params.id,updateMeasure)
+    Axios.post('http://localhost:3000/sensors/update/'+this.props.match.params.id,updateMeasure)
     .then(res => console.log(res.data));
     console.log(this.state.id);
-    this.props.history.push('/admin/'+this.props.id);   
+    this.props.history.push('/users/'+this.state.userID);   
   }
 
   componentDidMount(){
-      Axios.get('http://localhost:3000/measures/'+this.props.match.params.id)
+      Axios.get('http://localhost:3000/sensors/'+this.props.match.params.id)
       .then(response => {
+        console.log(response.data[0].location);
           this.setState({
-            measureID:response.data.measureID,
-            type:response.data.type,
-            creationDate:response.data.creationDate,
-            value:response.data.value,
-            sensorID:response.data.sensorID
+            userID:response.data[0].userID,
+            location:response.data[0].location,
+            creationDate:response.data[0].creationDate,
+            
           })
+          console.log(this.state);
       })
       .catch(function(error){
           console.log(error);
@@ -110,25 +87,18 @@ export default class Edit extends Component {
             md={{ span: 6, offset: 3 }}>
                 <Form onSubmit={this.onSubmit}>
                     <Form.Group controlId="exampleForm.ControlInput1">
-                        <Form.Label>Measure ID: </Form.Label>
-                        <Form.Control type="text" value={this.state.measureID} onChange={this.onChangeMeasureID}/>
+                        <Form.Label>User ID: </Form.Label>
+                        <Form.Control type="text" value={this.state.userID} onChange={this.onChangeUserID}/>
                     </Form.Group>
                     <Form.Group controlId="exampleForm.ControlInput2">
                         <Form.Label>Type: </Form.Label>
-                        <Form.Control type="text" value={this.state.type} onChange={this.onChangeType}/>
+                        <Form.Control type="text" value={this.state.location} onChange={this.onChangeLocation}/>
                     </Form.Group>
                     <Form.Group controlId="exampleForm.ControlInput3">
                         <Form.Label>Date de creation: </Form.Label>
                         <Form.Control type="text" value={this.state.creationDate} onChange={this.onChangeCreationDate}/>
                     </Form.Group>
-                    <Form.Group controlId="exampleForm.ControlInput3">
-                        <Form.Label>Valeur: </Form.Label>
-                        <Form.Control type="text" value={this.state.value} onChange={this.onChangeValue}/>
-                    </Form.Group>
-                    <Form.Group controlId="exampleForm.ControlInput3">
-                        <Form.Label>ID Capteur: </Form.Label>
-                        <Form.Control type="text" value={this.state.sensorID} onChange={this.onChangeSensorID}/>
-                    </Form.Group>    
+
                     <Button type="submit" value="Update">Modifier</Button> 
                 </Form>
                 

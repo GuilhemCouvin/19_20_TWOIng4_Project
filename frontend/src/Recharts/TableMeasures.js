@@ -3,29 +3,44 @@ import { Table } from 'reactstrap';
 import './TableMeasures.css'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import {ResponsiveContainer} from 'recharts';
 
-const Measure = props => (
-  <tr>
-    <td>{props.measure.type}</td>
-    <td>{props.measure.creationDate}</td>
-    <td>{props.measure.value}</td>
-    <td>{props.measure.sensorID}</td>
-    <td>
-      <Link to={"/edit/"+props.measure._id}>Edit</Link>
-    </td>
-  </tr>
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+} from "recharts";
+
+const Barchart = props => (
+  <ResponsiveContainer aspect="2">
+  <BarChart
+        data={props.measure}
+        margin={{ top: 5, right: 20, left: 5, bottom: 0 }}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="creationDate" />
+        <YAxis />
+        <Tooltip />
+        {/* <Legend /> */}
+        <Bar dataKey="value" fill="#8884d8" />
+      </BarChart>
+      </ResponsiveContainer>
 )
 
 class Tablechart extends Component{
   
-  constructor(props){
+  constructor(props){ 
     super(props);
     this.state ={
       measures: [],
       user_measures:[],
       sensors: [],
       user_sensors:[],
-      id: props.id
+      id: props.id,
+      final:[]
     }
   }
 
@@ -58,7 +73,7 @@ class Tablechart extends Component{
       const array =this.state.user_measures;
       Array.prototype.forEach.call(this.state.user_sensors,sensor => {
         Array.prototype.forEach.call(this.state.measures,measure => {
-          if(sensor.sensorID === measure.sensorID){
+          if(sensor._id === measure.sensorID){
             array.push(measure);
           }
         });
@@ -67,7 +82,16 @@ class Tablechart extends Component{
       this.setState({
         user_measures:array
       });
-
+      const array_new=[];
+      Array.prototype.forEach.call(this.state.user_measures,measure=>{
+        if(measure.type==='airPollution'){
+          array_new.push(measure);
+        }
+      });
+      console.log('lele',array_new);
+      this.setState({
+        final:array_new
+      })
     })
       .catch(function(error){
         console.log(error);
@@ -81,11 +105,7 @@ class Tablechart extends Component{
   }
 
   measuresList(){
-    return this.state.user_measures.map(function(currentMeasure,i){
-      if(currentMeasure.type==='airPollution'){
-        return <Measure measure={currentMeasure} key={i} />
-      }
-    })
+    return <Barchart measure={this.state.final} /> 
   }
 
 
@@ -94,20 +114,7 @@ class Tablechart extends Component{
         return (
           <div>
           <h3 style={{textAlign: 'center',marginTop:26}}>Indices de pollution relevés</h3>
-            <Table dark>
-              <thead>
-                <tr>
-                  <th>Type</th>
-                  <th>Date</th>
-                  <th>Indices</th>
-                  <th>ID Capteur</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {this.measuresList()}
-              </tbody>
-            </Table>
+          {this.measuresList()}
             </div>
           );
     }
