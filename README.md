@@ -1,5 +1,7 @@
 ## Daubignard Adrien - Couvin Guilhem
 
+#  ATTENTON: Le src/ présent en dehors du front est une erreur de commit, il est obsolète et n'est pas utilisé par le code
+
 # Projet de fin de semestre
 
 A lire impérativement avant de commencer quoi que ce soit, ce sont les règles que vous devrez appliquer tout au long du semestre:
