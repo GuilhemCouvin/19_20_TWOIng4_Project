@@ -2,6 +2,8 @@
 
 ###  ATTENTON: Le src/ présent en dehors du front est une erreur de commit, il est obsolète et n'est pas utilisé par le code
 
+### Lien de la vidéo LOOM: https://www.loom.com/share/7464e34120c1492085ccad8e0ab0031c
+
 # Projet de fin de semestre
 
 A lire impérativement avant de commencer quoi que ce soit, ce sont les règles que vous devrez appliquer tout au long du semestre:
