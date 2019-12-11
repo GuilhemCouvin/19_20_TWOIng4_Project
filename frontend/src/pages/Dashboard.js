@@ -9,41 +9,44 @@ import Circle from './../Recharts/Circlecharts';
 import TodoApp from './../Recharts/Todolist';
 import Bar from './../Recharts/ProgressBar';
 import Tablechart from './../Recharts/TableMeasures';
+import Thermo from './../Recharts/Thermo';
 
 import "react-circular-progressbar/dist/styles.css";
 
 
 export default class Dashboard extends Component {
 
-  state = {
-    bulletin: [
-      {date: '07/11', maths: 15, physics: 13}, 
-      {date: '14/11', maths: 17, physics: 15},
-      {date: '21/11', maths: 8, physics: 13},
-      {date: '28/11', maths: 11, physics: 11},
-      {date: '05/12', maths: 13, physics: 16},
-    ],
-    moyenne: {
-      maths:10, 
-      physics:10
-    },
-    dashboard: true,
-    additem: false,
-    abs: {name:'Absences', nb:13,lim:20},
-    ret: {name:'Retards', nb:8,lim:15},
-    todoItems: [
-      {index: 1, value: "Interro Maths", done: false},
-      {index: 2, value: "DM Physics", done: false},
-      {index: 3, value: "Exercices Maths", done: false},
-      {index: 4, value: "DS Physics", done: false},
-    ]
-  };
+  
 
     constructor(props) {
         super(props);
+        this.state = {
+          id:props.id,
+          bulletin: [
+            {date: '07/11', maths: 15, physics: 13}, 
+            {date: '14/11', maths: 17, physics: 15},
+            {date: '21/11', maths: 8, physics: 13},
+            {date: '28/11', maths: 11, physics: 11},
+            {date: '05/12', maths: 13, physics: 16},
+          ],
+          moyenne: {
+            maths:10, 
+            physics:10
+          },
+          dashboard: true,
+          additem: false,
+          abs: {name:'Absences', nb:13,lim:20},
+          ret: {name:'Retards', nb:8,lim:15},
+          todoItems: [
+            {index: 1, value: "Interro Maths", done: false},
+            {index: 2, value: "DM Physics", done: false},
+            {index: 3, value: "Exercices Maths", done: false},
+            {index: 4, value: "DS Physics", done: false},
+          ]
+        };
+
         this.handleMoyenne = this.handleMoyenne.bind(this);
      }
-      //state = this.props.data;
 
   handleMoyenne(){
     console.log(this.state.bulletin.length);
@@ -65,11 +68,21 @@ export default class Dashboard extends Component {
     console.log(this.state);
   }
 
-    componentDidMount() {
-        setTimeout(() => {
-        this.handleMoyenne();
-        })
+  componentDidMount() {
+    let id = this.props.match.params.id;
+    this.setState({
+      id:id
+    })
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.match.params.slug !== this.props.match.params.slug) {
+      let id = this.props.match.params.id;
+      this.setState({
+        id:id
+      })
     }
+  }
 
   render(){
     return (
@@ -77,17 +90,18 @@ export default class Dashboard extends Component {
         <Container>
           <Row>
             <Col xs={12} md={3} className="widget">
-              <Circle data={this.state.moyenne}/>
+              <Thermo id={this.props.match.params.id}/>
             </Col>
             <Col xs={12} md={8} className="widget">
-              <Widget data={this.state.bulletin}/>
+              <Widget id={this.props.match.params.id}/>
             </Col>
           </Row>
 
           <Row>
             <Col xs={12} md={8} className="widget">
-              <Bar data={this.state.abs}/>
-              <Bar data={this.state.ret}/>
+              {/* <Bar data={this.state.abs}/>
+              <Bar data={this.state.ret}/> */}
+              <Chart id={this.props.match.params.id}/>
             </Col>
             <Col xs={12} md={3} className="widget">
               <Circle data={this.state.moyenne}/>
@@ -99,7 +113,7 @@ export default class Dashboard extends Component {
               < TodoApp todoItems={this.state.todoItems}/>
             </Col>
             <Col xs={12} md={8} className="widget">
-              <Tablechart />
+              <Tablechart id={this.props.match.params.id}/>
             </Col>
           </Row>
         </Container>

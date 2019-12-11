@@ -37,7 +37,6 @@ class TodoListItem extends Component {
     return(
       <li className="list-group-item ">
         <div className={todoClass} >
-          {/* <span className="glyphicon glyphicon-ok icon" aria-hidden="true" onClick={this.onClickDone}></span> */}
           <span onClick={this.onClickDone} >{this.props.item.value}</span>
           <button type="button" className="close" onClick={this.onClickClose}>&times;</button>
         </div>
@@ -48,7 +47,7 @@ class TodoListItem extends Component {
   
 class TodoHeader extends Component {
   render () {
-    return <h3>Devoirs</h3>;
+    return <h3>Capteurs actifs:</h3>;
   }
 }
 

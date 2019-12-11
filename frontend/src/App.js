@@ -13,7 +13,7 @@ import "react-circular-progressbar/dist/styles.css";
 
 
 const UserLink = props => (
-<Link to={`/users/${props.user.userID}`} className="navbar-brand">DashUser {props.user.userID + 1 }</Link>
+<Link to={`/users/${props.user.userID}`}  className="navbar-brand">DashUser {props.user.userID + 1 }</Link>
 )
 
 class App extends Component {
@@ -21,7 +21,8 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state ={
-      users: []
+      users: [],
+      id:''
     }
   }
     
@@ -51,7 +52,13 @@ class App extends Component {
             {this.usersLinkList()}
           </nav>
           <Container>
-            <Route path='/users/:token' exact component={Dashboard} />
+            {/* <Route path='/users/:id' exact component={Dashboard} /> */}
+
+            <Route exact path='/users/:id' render={props => (
+              <Dashboard {...props} id={this.state.id} />
+            )}
+          />
+
             <Route path='/' exact component={Dashboard} />
             <Route path='/admin'  component={Additem} />
           </Container>
