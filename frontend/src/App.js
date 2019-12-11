@@ -8,6 +8,8 @@ import axios from 'axios';
 
 import Dashboard from './pages/Dashboard';
 import Additem from './pages/Additem';
+import EditMeasure from './pages/EditMeasure';
+import DeleteUser from './pages/DeleteUser';
 
 import "react-circular-progressbar/dist/styles.css";
 
@@ -52,15 +54,11 @@ class App extends Component {
             {this.usersLinkList()}
           </nav>
           <Container>
-            {/* <Route path='/users/:id' exact component={Dashboard} /> */}
-
-            <Route exact path='/users/:id' render={props => (
-              <Dashboard {...props} id={this.state.id} />
-            )}
-          />
-
+            <Route exact path='/users/:id' render={props => (<Dashboard {...props} id={this.state.id} />)}/>
             <Route path='/' exact component={Dashboard} />
             <Route path='/admin'  component={Additem} />
+            <Route exact path='/edit/:id' render={props => (<EditMeasure {...props} id={this.state.id} />)}/>
+            <Route exact path='/delete/:id' render={props => (<DeleteUser {...props} id={this.state.id} />)}/>
           </Container>
         </div>
       </Router>

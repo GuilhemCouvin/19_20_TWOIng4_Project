@@ -67,14 +67,15 @@ class Additem extends Component {
       houseSize: this.state.houseSize
     }
 
-    Axios.post('http://localhost:3000/users/add',newUser).then(res => console.log(res.data));
-
+    Axios.post('http://localhost:3000/users/add',newUser)
+    .then(res => console.log(res.data));
     this.setState({
       userID:'',
       country:'',
       personsInHouse:'',
       houseSize:''
     })
+    this.props.history.push('/admin/');
   }
 
   render(){
