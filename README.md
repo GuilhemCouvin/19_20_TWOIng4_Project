@@ -1,6 +1,6 @@
 ## Daubignard Adrien - Couvin Guilhem
 
-#  ATTENTON: Le src/ présent en dehors du front est une erreur de commit, il est obsolète et n'est pas utilisé par le code
+###  ATTENTON: Le src/ présent en dehors du front est une erreur de commit, il est obsolète et n'est pas utilisé par le code
 
 # Projet de fin de semestre
 
