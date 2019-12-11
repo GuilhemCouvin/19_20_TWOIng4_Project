@@ -49,7 +49,7 @@ router.post('/add', (req, res) => {
 router.route('/delete/:id').post(function(req, res) {
   User.findByIdAndDelete(req.params.id,function(err,user){
     if(!user){
-      res.status(400).send('Usernot found');
+      res.status(400).send('User not found');
     }else{
       res.json(`User removed succesfully !`);
     }
