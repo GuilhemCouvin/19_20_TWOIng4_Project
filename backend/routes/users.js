@@ -44,4 +44,16 @@ router.post('/add', (req, res) => {
   });
 });
 
+
+/* DELETE one user.*/
+router.route('/delete/:id').post(function(req, res) {
+  User.findByIdAndDelete(req.params.id,function(err,user){
+    if(!user){
+      res.status(400).send('Usernot found');
+    }else{
+      res.json(`User removed succesfully !`);
+    }
+  }); 
+});
+
 module.exports = router;

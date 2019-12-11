@@ -40,6 +40,28 @@ router.delete('/:id', function(req, res) {
   }); 
 });
 
+/* UPDATE one measure*/
+router.route('/update/:id').post(function(req, res) {
+  Measure.findById(req.params.id,function(err,measure){
+    if(!measure){
+      res.status(404).send('Data not found');
+    }else{
+      measure.measureID = req.body.measureID;
+      measure.type = req.body.type;
+      measure.creationDate = req.body.creationDate;
+      measure.value = req.body.value;
+      measure.sensorID = req.body.sensorID;
+
+      measure.save().then(measure => {
+        res.json('Measure updated');
+      })
+      .catch(err => {
+        res.status(400).send('Update not possible');
+      });
+    }
+  });
+});
+
 
 
 /* POST measures listing. */
