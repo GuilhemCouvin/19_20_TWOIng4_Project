@@ -1,6 +1,8 @@
 ## Daubignard Adrien - Couvin Guilhem
 
-###  ATTENTON: Le src/ présent en dehors du front est une erreur de commit, il est obsolète et n'est pas utilisé par le code
+###  /!\ ATTENTON: Le src/ présent en dehors du front est une erreur de commit, il est obsolète et n'est pas utilisé par le code /!\
+
+### Lien de la vidéo LOOM (avec explications): https://www.loom.com/share/0446cf8197d649b29e1aa321c73c078e
 
 ### Lien de la vidéo LOOM: https://www.loom.com/share/7464e34120c1492085ccad8e0ab0031c
 
